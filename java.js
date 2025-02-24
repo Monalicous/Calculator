@@ -1,55 +1,38 @@
-let currentInput = "";
-let previousInput = "";
-let operator = "";
+let display = document.getElementById("display");
 
 
+// appends numbers
 function appendToDisplay(value) {
-    let display = document.getElementById('display');
-    if (value === "%") {
-        if (previousInput !== "") {
-            currentInput = (parseFloat(previousInput) * (parseFloat(currentInput) / 100)).toString();
-            display.value = currentInput;
-
-        } else {
-            display.value += value;
-            currentInput = display.value;
-        }
-    }
+    display.value += value;
 }
 
-// Function to clear the display
+// Function for the c button
 function clearDisplay() {
-    let display = document.getElementById("display"); display.value = '';
-    currentInput = '';
-    previousInput = '';
-    operator = '';
-}
-
-
-// Function to calculate the result
-function appendToDisplay(value) {
-    let display = document.getElementById('display');
-    if (value === "%") {
-        if (previousInput !== "") {
-            currentInput = (parseFloat(previousInput) * (parseFloat(currentInput) / 100)).toString();
-            display.value = currentInput;
-
-        } else {
-            display.value += value;
-            currentInput = display.value;
-        }
-    }
-}
-
-
-function setOperator(value) {
-    let display = document.getElementById("display");
-    operator = value;
-    previousInput = display.value;
     display.value = "";
 }
 
+
+// function for the backspace button
 function backSpace() {
-    let diplay = document.getElementById("display");
-    diplay.value = display.value.slice(0, -1);
+    display.value = display.value.slice(0, -1);
+}
+
+
+// function to calculate the total
+function calculateResult() {
+    try {
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = "Error";
+    }
+}
+
+
+// function to handle the percentage calcution
+function calculatePercentage() {
+    try {
+        display.value = eval(display.value) / 100;
+    } catch (error) {
+        display.value = "Error";
+    }
 }
